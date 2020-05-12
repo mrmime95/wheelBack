@@ -58,7 +58,7 @@ class CreateMyTables extends Migration
             $table->string('fuel', 1);
             $table->string('rain',1);
             $table->integer('sound');
-            $table->double('oldPrice');
+            $table->double('oldPrice')->nullable();
             $table->double('newPrice');
             $table->double('vat');
             $table->integer('pieceNumber')->unsigned();
@@ -89,7 +89,7 @@ class CreateMyTables extends Migration
                 'fuel' => 'g',
                 'rain' => 'e',
                 'sound' => 73,
-                'oldPrice' => 475.00,
+                'oldPrice' => null,
                 'newPrice' => 400.00,
                 'vat' => 20,
                 'pieceNumber' => 4,
@@ -104,7 +104,7 @@ class CreateMyTables extends Migration
                 'fuel' => 'g',
                 'rain' => 'e',
                 'sound' => 73,
-                'oldPrice' => 333.00,
+                'oldPrice' => null,
                 'newPrice' => 300.00,
                 'vat' => 29.33,
                 'pieceNumber' => 9,

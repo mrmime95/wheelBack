@@ -18,20 +18,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-/* 
-Route::get('user', 'User\UserController@user');
-Route::get('user/{id}', 'User\UserController@userById');
-Route::post('user', 'User\UserController@userSave');
-Route::put('user/{id}', 'User\UserController@userUpdate');
-Route::delete('user/{id}', 'User\UserController@userDelete');
- */
-
 Route::post('auth/register', 'Auth\AuthController@register');
 Route::post('auth/login', 'Auth\AuthController@login');
 Route::get('auth/logout', 'Auth\AuthController@logout');
 Route::get('auth/user', 'Auth\AuthController@getAuthUser');
 
+Route::get('product/promo', 'Product\ProductController@getAProductWithPromotion');
 
 Route::apiResource('user', 'User\UserController');
 Route::apiResource('checkout', 'Checkout\CheckoutController');
 Route::apiResource('product', 'Product\ProductController');
+
