@@ -41,13 +41,13 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->user()->id){
+        Log::info($request);
+        if(!$request->user()->id){
             return response()->json(['error' => 'Unauthorized.'], 401);
         } 
 
         $this->validate($request, [
             'address' => 'required',
-            'checkout_data'=> 'required',
             'products' => 'required',
         ]);
 
@@ -64,18 +64,26 @@ class CheckoutController extends Controller
         $checkout = new Checkout;
         $checkout->user_id = $request->user()->id;
         $checkout->address = $request->address;
-        $checkout->checkout_data = $request->checkout_data;
+        $checkout->bank = $request->bank;
+        $checkout->comments = $request->comments;
+        $checkout->deliveryMethod = $request->deliveryMethod;
+        $checkout->email = $request->email;
+        $checkout->firstName = $request->firstName;
+        $checkout->iban = $request->iban;
+        $checkout->name = $request->name;
+        $checkout->paymentMethod = $request->paymentMethod;
+        $checkout->personType = $request->personType;
+        $checkout->termsAgree = $request->termsAgree;
+        $checkout->registrationNumber = $request->registrationNumber;
         $checkout->date = now()->timestamp;
         
-
+        $checkout->save();
         foreach ($request->products as $product_id => $amount){
             $product = Product::find($product_id);
             $product->pieceNumber = $product->pieceNumber - $amount;
             $product->save(); 
-            $product->checkouts()->attach($checkout->id, array('amount' => $amount));
+            $checkout->products()->attach($product_id, array('amount' => $amount));
         }
-
-        $checkout->save();
 
 
         return new CheckoutResource($checkout);

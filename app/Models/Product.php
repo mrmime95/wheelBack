@@ -33,12 +33,4 @@ class Product extends Model
         
     }
 
- /*     public function scopePromotion($query, $filters)
-    {
-
-
-            $query=$query->where('promotion',"=", $filters['useFor']);
-        
-    } */
-
 }
