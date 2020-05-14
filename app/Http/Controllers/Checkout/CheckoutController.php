@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 use App\Models\Checkout;
 use App\Models\Product;
 use App\Http\Resources\CheckoutResource;
-use Log;
 
 class CheckoutController extends Controller
 {
@@ -41,7 +40,6 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {
-        Log::info($request);
         if(!$request->user()->id){
             return response()->json(['error' => 'Unauthorized.'], 401);
         } 
@@ -100,7 +98,6 @@ class CheckoutController extends Controller
         if($request->user()->id != $checkout->user_id){
             return response()->json(['error' => 'Unauthorized.'], 401);
         } 
-        Log::info($checkout->address);
         return new CheckoutResource($checkout);
     }
 

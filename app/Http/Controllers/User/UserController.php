@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 
 use App\Models\User;
 use Validator;
-use Log;
 
 class UserController extends Controller
 {
